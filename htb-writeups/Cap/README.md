@@ -1,6 +1,6 @@
 # HTB — Cap 🐧
 
-![HTB Cap](https://labs.hackthebox.com/achievement/machine/3159649/351)
+🔗 [View HTB Achievement](https://labs.hackthebox.com/achievement/machine/3159649/351)
 
 > **Difficulty:** Easy | **OS:** Linux | **IP:** 10.129.9.89 | **Time to Root:** 2h 13min
 
