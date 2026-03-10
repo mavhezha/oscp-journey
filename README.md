@@ -15,11 +15,11 @@ I'm currently training for the OSCP certification through daily hands-on practic
 
 | Metric | Count |
 |--------|-------|
-| 🖥️ Machines Rooted | 1 |
+| 🖥️ Machines Rooted | 2 |
 | 🐧 Linux Machines | 1 |
-| 🪟 Windows Machines | 0 |
-| 🏢 Active Directory | 0 |
-| 📝 Writeups Published | 1 |
+| 🪟 Windows Machines | 1 |
+| 🏢 Active Directory | 1 |
+| 📝 Writeups Published | 2 |
 
 > Updated after every machine
 
@@ -32,6 +32,7 @@ I'm currently training for the OSCP certification through daily hands-on practic
 | # | Machine | OS | Difficulty | Techniques | Writeup |
 |---|---------|-----|-----------|------------|---------|
 | 1 | [Cap](htb-writeups/Cap/README.md) | 🐧 Linux | Easy | IDOR, PCAP Analysis, Password Reuse, Linux Capabilities | [View](htb-writeups/Cap/README.md) |
+| 2 | [Eighteen](htb-writeups/Eighteen/README.md) | 🪟 Windows | Easy | MSSQL Enumeration, User Impersonation, Hash Replacement, NTLMv2 Capture, WinRM | [View](htb-writeups/Eighteen/README.md) |
 
 ---
 
@@ -41,20 +42,24 @@ I'm currently training for the OSCP certification through daily hands-on practic
 - Nmap (port scanning, service detection, script scanning)
 - Gobuster / ffuf (web directory and parameter fuzzing)
 - Manual web enumeration (IDOR, parameter tampering)
+- Burp Suite (traffic interception, request manipulation)
 
 **Exploitation**
 - Web vulnerabilities (IDOR, LFI, SQLi, file upload)
 - FTP/SSH credential attacks
 - PCAP analysis with Wireshark
+- MSSQL exploitation (impacket-mssqlclient, user impersonation, xp_dirtree)
+- NTLMv2 hash capture with Responder
 
 **Privilege Escalation**
 - Linux: SUID, capabilities, cron jobs, sudo misconfigurations
 - Windows: Service misconfigurations, token impersonation *(in progress)*
-- Active Directory *(in progress)*
+- Active Directory: Domain enumeration, WinRM access *(in progress)*
 
 **Tools**
 - Nmap, Gobuster, Wireshark, linPEAS/winPEAS
 - Metasploit, Burp Suite, BloodHound *(in progress)*
+- impacket-mssqlclient, evil-winrm, Responder, hashcat
 - Python scripting for exploit modification
 
 ---
