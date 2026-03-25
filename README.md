@@ -20,8 +20,28 @@ I'm currently training for the OSCP certification through daily hands-on practic
 | 🪟 Windows Machines | 1 |
 | 🏢 Active Directory | 1 |
 | 📝 Writeups Published | 2 |
+| 🎓 Academy Modules Completed | 12 |
 
 > Updated after every machine
+
+---
+
+## 🎓 HTB Academy — Completed Modules
+
+| Module | Completed |
+|--------|-----------|
+| Penetration Testing Process | ✅ 2026-03-17 |
+| Network Enumeration with Nmap | ✅ 2026-03-25 |
+| Footprinting | ✅ 2026-03-25 |
+| Shells & Payloads | ✅ 2026-03-25 |
+| Windows Privilege Escalation | ✅ 2026-03-25 |
+| Linux Privilege Escalation | ✅ 2026-03-25 |
+| File Transfers | ✅ 2026-03-25 |
+| Password Attacks | ✅ 2026-03-25 |
+| Web Attacks | ✅ 2026-03-25 |
+| Using Web Proxies (Burp Suite) | ✅ 2026-03-25 |
+| Active Directory Enumeration & Attacks | ✅ 2026-03-25 |
+| SQL Injection Fundamentals | ✅ 2026-03-25 |
 
 ---
 
@@ -43,36 +63,40 @@ I'm currently training for the OSCP certification through daily hands-on practic
 - Gobuster / ffuf (web directory and parameter fuzzing)
 - Manual web enumeration (IDOR, parameter tampering)
 - Burp Suite (traffic interception, request manipulation)
+- AD enumeration (BloodHound, PowerView, crackmapexec)
 
 **Exploitation**
-- Web vulnerabilities (IDOR, LFI, SQLi, file upload)
+- Web vulnerabilities (IDOR, LFI, SQLi, SSTI, file upload)
 - FTP/SSH credential attacks
 - PCAP analysis with Wireshark
 - MSSQL exploitation (impacket-mssqlclient, user impersonation, xp_dirtree)
 - NTLMv2 hash capture with Responder
+- Kerberoasting, ASREPRoasting
 
 **Privilege Escalation**
-- Linux: SUID, capabilities, cron jobs, sudo misconfigurations
-- Windows: Service misconfigurations, token impersonation *(in progress)*
-- Active Directory: Domain enumeration, WinRM access *(in progress)*
+- Linux: SUID, capabilities, cron jobs, sudo misconfigurations, linPEAS
+- Windows: SeImpersonatePrivilege, service misconfigs, AlwaysInstallElevated, winPEAS
+- Active Directory: Pass-the-Hash, DCSync, BloodHound attack paths
 
 **Tools**
 - Nmap, Gobuster, Wireshark, linPEAS/winPEAS
-- Metasploit, Burp Suite, BloodHound *(in progress)*
-- impacket-mssqlclient, evil-winrm, Responder, hashcat
-- Python scripting for exploit modification
+- Burp Suite, sqlmap, ffuf
+- impacket suite, evil-winrm, Responder, hashcat, Hydra
+- BloodHound, PowerView, crackmapexec
+- msfvenom, Metasploit
 
 ---
 
 ## 🗺️ Roadmap
 
 ```
-March 2026      → Enumeration & Foundations
-April 2026      → Skill Acceleration (AD, Windows PrivEsc)
-Early May 2026  → Pre-Lab Mastery + Mock Exam #1
-Mid May 2026    → PEN-200 Course + Lab Access
-June 2026       → Lab Grind + Mock Exam #2
-July 2026       → OSCP Exam 🎯
+March 9-25 2026  → HTB Academy (12 modules completed ✅)
+April 1 2026     → HTB VIP — Machine grind begins
+April 2026       → 15+ machines (Windows, Linux, AD)
+Early May 2026   → Pre-Lab Mastery + Mock Exam #1
+Mid May 2026     → PEN-200 Course + Lab Access
+June 2026        → Lab Grind + Mock Exam #2
+July 2026        → OSCP Exam 🎯
 ```
 
 ---
