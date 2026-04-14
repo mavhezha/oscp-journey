@@ -7,7 +7,7 @@
 
 ## 👤 About
 
-I'm currently training for the OSCP certification through daily hands-on practice on Hack The Box and TryHackMe. This repository documents every machine I root — including my methodology, tools used, vulnerabilities exploited, and lessons learned.
+I'm currently training for the OSCP certification through daily hands-on practice on Hack The Box and TryHackMe. This repository documents every machine I root, including my methodology, tools used, vulnerabilities exploited, and lessons learned.
 
 ---
 
@@ -15,11 +15,11 @@ I'm currently training for the OSCP certification through daily hands-on practic
 
 | Metric | Count |
 |--------|-------|
-| 🖥️ Machines Rooted | 2 |
+| 🖥️ Machines Rooted | 7 |
 | 🐧 Linux Machines | 1 |
-| 🪟 Windows Machines | 1 |
-| 🏢 Active Directory | 1 |
-| 📝 Writeups Published | 2 |
+| 🪟 Windows Machines | 6 |
+| 🏢 Active Directory | 5 |
+| 📝 Writeups Published | 7 |
 | 🎓 Academy Modules Completed | 12 |
 
 > Updated after every machine
@@ -53,6 +53,11 @@ I'm currently training for the OSCP certification through daily hands-on practic
 |---|---------|-----|-----------|------------|---------|
 | 1 | [Cap](htb-writeups/Cap/README.md) | 🐧 Linux | Easy | IDOR, PCAP Analysis, Password Reuse, Linux Capabilities | [View](htb-writeups/Cap/README.md) |
 | 2 | [Eighteen](htb-writeups/Eighteen/README.md) | 🪟 Windows | Easy | MSSQL Enumeration, User Impersonation, Hash Replacement, NTLMv2 Capture, WinRM | [View](htb-writeups/Eighteen/README.md) |
+| 3 | [Forest](htb-writeups/Forest/README.md) | 🪟 Windows | Easy | AS-REP Roasting, BloodHound, WriteDACL, DCSync, Pass-the-Hash | [View](htb-writeups/Forest/README.md) |
+| 4 | [Sauna](htb-writeups/Sauna/README.md) | 🪟 Windows | Easy | AS-REP Roasting, Username Enumeration, AutoLogon, DCSync, Pass-the-Hash | [View](htb-writeups/Sauna/README.md) |
+| 5 | [Active](htb-writeups/Active/README.md) | 🪟 Windows | Easy | GPP Credentials, Kerberoasting, psexec | [View](htb-writeups/Active/README.md) |
+| 6 | [Support](htb-writeups/Support/README.md) | 🪟 Windows | Easy | LDAP Enumeration, .NET Reverse Engineering, GenericAll, RBCD | [View](htb-writeups/Support/README.md) |
+| 7 | [Timelapse](htb-writeups/Timelapse/README.md) | 🪟 Windows | Easy | SMB Enumeration, PFX Certificate Auth, PowerShell History, LAPS | [View](htb-writeups/Timelapse/README.md) |
 
 ---
 
@@ -63,7 +68,7 @@ I'm currently training for the OSCP certification through daily hands-on practic
 - Gobuster / ffuf (web directory and parameter fuzzing)
 - Manual web enumeration (IDOR, parameter tampering)
 - Burp Suite (traffic interception, request manipulation)
-- AD enumeration (BloodHound, PowerView, crackmapexec)
+- AD enumeration (BloodHound, ldapsearch, rpcclient, crackmapexec)
 
 **Exploitation**
 - Web vulnerabilities (IDOR, LFI, SQLi, SSTI, file upload)
@@ -71,18 +76,21 @@ I'm currently training for the OSCP certification through daily hands-on practic
 - PCAP analysis with Wireshark
 - MSSQL exploitation (impacket-mssqlclient, user impersonation, xp_dirtree)
 - NTLMv2 hash capture with Responder
-- Kerberoasting, ASREPRoasting
+- Kerberoasting, AS-REP Roasting
+- .NET binary reverse engineering (monodis, strings)
+- Certificate-based WinRM authentication (PFX, openssl)
 
 **Privilege Escalation**
 - Linux: SUID, capabilities, cron jobs, sudo misconfigurations, linPEAS
 - Windows: SeImpersonatePrivilege, service misconfigs, AlwaysInstallElevated, winPEAS
-- Active Directory: Pass-the-Hash, DCSync, BloodHound attack paths
+- Active Directory: Pass-the-Hash, DCSync, BloodHound attack paths, RBCD, LAPS, WriteDACL, GenericAll
 
 **Tools**
 - Nmap, Gobuster, Wireshark, linPEAS/winPEAS
 - Burp Suite, sqlmap, ffuf
-- impacket suite, evil-winrm, Responder, hashcat, Hydra
-- BloodHound, PowerView, crackmapexec
+- impacket suite, evil-winrm, Responder, hashcat, john
+- BloodHound, PowerView, crackmapexec, bloodhound-python
+- openssl, monodis, zip2john, pfx2john
 - msfvenom, Metasploit
 
 ---
@@ -106,14 +114,17 @@ July 2026        → OSCP Exam 🎯
 Every machine follows this workflow:
 
 ```
-1. Nmap full port scan (-Pn -sV -sC -p- --min-rate 5000)
-2. Enumerate each service found
-3. Web: manual browse → gobuster → parameter testing → vuln identification
-4. Exploit initial access vector
-5. Post-exploitation: whoami, id, sudo -l, getcap, linPEAS/winPEAS
-6. Privilege escalation
-7. Capture flags, document, screenshot everything
-8. Write report
+Phase A: nmap -p- --min-rate 1000 (wide port scan)
+Phase B: nmap -sV -sC -p <ports> --min-rate 1000 (deep service scan)
+1. Enumerate each service found
+2. Web: manual browse → gobuster → parameter testing → vuln identification
+3. SMB: anonymous enum → share listing → file download → credential extraction
+4. LDAP: anonymous bind → authenticated dump → attribute hunting
+5. Exploit initial access vector
+6. Post-exploitation: whoami, PowerShell history, BloodHound immediately
+7. Privilege escalation via BloodHound attack path
+8. Capture flags, document, screenshot everything
+9. Write Obsidian note, GitHub writeup, YouTube script
 ```
 
 ---
@@ -125,7 +136,7 @@ Every machine follows this workflow:
 | [HackTricks](https://book.hacktricks.xyz) | Technique reference |
 | [GTFOBins](https://gtfobins.github.io) | Linux PrivEsc |
 | [LOLBAS](https://lolbas-project.github.io) | Windows PrivEsc |
-| [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings) | Payloads & bypasses |
+| [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings) | Payloads and bypasses |
 | [Exploit-DB](https://exploit-db.com) | Public exploits |
 | [TJ Null's OSCP List](https://docs.google.com/spreadsheets/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8) | OSCP-like HTB machines |
 
@@ -133,9 +144,9 @@ Every machine follows this workflow:
 
 ## ⚙️ Setup
 
-- **OS:** Kali Linux
+- **OS:** Kali Linux (VM on Mac)
 - **Note-taking:** Obsidian
-- **Practice Platforms:** Hack The Box, TryHackMe
+- **Practice Platforms:** Hack The Box
 - **Scripting:** Python 3
 
 ---
