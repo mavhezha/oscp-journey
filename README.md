@@ -1,6 +1,6 @@
 # 🛡️ OSCP Journey
 
-> Documenting my path to the **Offensive Security Certified Professional (OSCP)** certification.  
+> Documenting my path to the **Offensive Security Certified Professional (OSCP)** certification.
 > Active practice on Hack The Box | Target exam date: **July 2026**
 
 ---
@@ -15,11 +15,11 @@ I'm currently training for the OSCP certification through daily hands-on practic
 
 | Metric | Count |
 |--------|-------|
-| 🖥️ Machines Rooted | 7 |
+| 🖥️ Machines Rooted | 8 |
 | 🐧 Linux Machines | 1 |
-| 🪟 Windows Machines | 6 |
-| 🏢 Active Directory | 5 |
-| 📝 Writeups Published | 7 |
+| 🪟 Windows Machines | 7 |
+| 🏢 Active Directory | 6 |
+| 📝 Writeups Published | 8 |
 | 🎓 Academy Modules Completed | 12 |
 
 > Updated after every machine
@@ -58,6 +58,7 @@ I'm currently training for the OSCP certification through daily hands-on practic
 | 5 | [Active](htb-writeups/Active/README.md) | 🪟 Windows | Easy | GPP Credentials, Kerberoasting, psexec | [View](htb-writeups/Active/README.md) |
 | 6 | [Support](htb-writeups/Support/README.md) | 🪟 Windows | Easy | LDAP Enumeration, .NET Reverse Engineering, GenericAll, RBCD | [View](htb-writeups/Support/README.md) |
 | 7 | [Timelapse](htb-writeups/Timelapse/README.md) | 🪟 Windows | Easy | SMB Enumeration, PFX Certificate Auth, PowerShell History, LAPS | [View](htb-writeups/Timelapse/README.md) |
+| 8 | [Return](htb-writeups/Return/README.md) | 🪟 Windows | Easy | Printer Credential Capture, Server Operators, Service Binary Hijack | [View](htb-writeups/Return/README.md) |
 
 ---
 
@@ -79,11 +80,12 @@ I'm currently training for the OSCP certification through daily hands-on practic
 - Kerberoasting, AS-REP Roasting
 - .NET binary reverse engineering (monodis, strings)
 - Certificate-based WinRM authentication (PFX, openssl)
+- Printer LDAP credential capture via netcat
 
 **Privilege Escalation**
 - Linux: SUID, capabilities, cron jobs, sudo misconfigurations, linPEAS
 - Windows: SeImpersonatePrivilege, service misconfigs, AlwaysInstallElevated, winPEAS
-- Active Directory: Pass-the-Hash, DCSync, BloodHound attack paths, RBCD, LAPS, WriteDACL, GenericAll
+- Active Directory: Pass-the-Hash, DCSync, BloodHound attack paths, RBCD, LAPS, WriteDACL, GenericAll, Server Operators
 
 **Tools**
 - Nmap, Gobuster, Wireshark, linPEAS/winPEAS
@@ -91,6 +93,7 @@ I'm currently training for the OSCP certification through daily hands-on practic
 - impacket suite, evil-winrm, Responder, hashcat, john
 - BloodHound, PowerView, crackmapexec, bloodhound-python
 - openssl, monodis, zip2john, pfx2john
+- netcat, sc.exe
 - msfvenom, Metasploit
 
 ---
@@ -122,7 +125,7 @@ Phase B: nmap -sV -sC -p <ports> --min-rate 1000 (deep service scan)
 4. LDAP: anonymous bind → authenticated dump → attribute hunting
 5. Exploit initial access vector
 6. Post-exploitation: whoami, PowerShell history, BloodHound immediately
-7. Privilege escalation via BloodHound attack path
+7. Privilege escalation via BloodHound attack path or manual group enumeration
 8. Capture flags, document, screenshot everything
 9. Write Obsidian note, GitHub writeup, YouTube script
 ```
@@ -153,8 +156,8 @@ Phase B: nmap -sV -sC -p <ports> --min-rate 1000 (deep service scan)
 
 ## 📜 Disclaimer
 
-All writeups in this repository are for **retired Hack The Box machines only**.  
-This content is for **educational purposes** and documents my personal learning journey.  
+All writeups in this repository are for **retired Hack The Box machines only**.
+This content is for **educational purposes** and documents my personal learning journey.
 Never use these techniques against systems you do not have explicit permission to test.
 
 ---
