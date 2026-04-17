@@ -15,11 +15,11 @@ I'm currently training for the OSCP certification through daily hands-on practic
 
 | Metric | Count |
 |--------|-------|
-| 🖥️ Machines Rooted | 8 |
+| 🖥️ Machines Rooted | 9 |
 | 🐧 Linux Machines | 1 |
-| 🪟 Windows Machines | 7 |
+| 🪟 Windows Machines | 8 |
 | 🏢 Active Directory | 6 |
-| 📝 Writeups Published | 8 |
+| 📝 Writeups Published | 9 |
 | 🎓 Academy Modules Completed | 12 |
 
 > Updated after every machine
@@ -59,6 +59,7 @@ I'm currently training for the OSCP certification through daily hands-on practic
 | 6 | [Support](htb-writeups/Support/README.md) | 🪟 Windows | Easy | LDAP Enumeration, .NET Reverse Engineering, GenericAll, RBCD | [View](htb-writeups/Support/README.md) |
 | 7 | [Timelapse](htb-writeups/Timelapse/README.md) | 🪟 Windows | Easy | SMB Enumeration, PFX Certificate Auth, PowerShell History, LAPS | [View](htb-writeups/Timelapse/README.md) |
 | 8 | [Return](htb-writeups/Return/README.md) | 🪟 Windows | Easy | Printer Credential Capture, Server Operators, Service Binary Hijack | [View](htb-writeups/Return/README.md) |
+| 9 | [Heist](htb-writeups/Heist/README.md) | 🪟 Windows | Easy | Cisco Password Cracking, RID Brute Force, Firefox Memory Dump | [View](htb-writeups/Heist/README.md) |
 
 ---
 
@@ -69,7 +70,7 @@ I'm currently training for the OSCP certification through daily hands-on practic
 - Gobuster / ffuf (web directory and parameter fuzzing)
 - Manual web enumeration (IDOR, parameter tampering)
 - Burp Suite (traffic interception, request manipulation)
-- AD enumeration (BloodHound, ldapsearch, rpcclient, crackmapexec)
+- AD enumeration (BloodHound, ldapsearch, rpcclient, crackmapexec, netexec)
 
 **Exploitation**
 - Web vulnerabilities (IDOR, LFI, SQLi, SSTI, file upload)
@@ -81,6 +82,8 @@ I'm currently training for the OSCP certification through daily hands-on practic
 - .NET binary reverse engineering (monodis, strings)
 - Certificate-based WinRM authentication (PFX, openssl)
 - Printer LDAP credential capture via netcat
+- Cisco password cracking (Type 5 hashcat, Type 7 XOR decode)
+- Browser process memory credential extraction
 
 **Privilege Escalation**
 - Linux: SUID, capabilities, cron jobs, sudo misconfigurations, linPEAS
@@ -91,9 +94,9 @@ I'm currently training for the OSCP certification through daily hands-on practic
 - Nmap, Gobuster, Wireshark, linPEAS/winPEAS
 - Burp Suite, sqlmap, ffuf
 - impacket suite, evil-winrm, Responder, hashcat, john
-- BloodHound, PowerView, crackmapexec, bloodhound-python
+- BloodHound, PowerView, crackmapexec, netexec, bloodhound-python
 - openssl, monodis, zip2john, pfx2john
-- netcat, sc.exe
+- netcat, sc.exe, procdump
 - msfvenom, Metasploit
 
 ---
