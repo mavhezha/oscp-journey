@@ -15,11 +15,11 @@ I'm currently training for the OSCP certification through daily hands-on practic
 
 | Metric | Count |
 |--------|-------|
-| 🖥️ Machines Rooted | 9 |
+| 🖥️ Machines Rooted | 10 |
 | 🐧 Linux Machines | 1 |
-| 🪟 Windows Machines | 8 |
-| 🏢 Active Directory | 6 |
-| 📝 Writeups Published | 9 |
+| 🪟 Windows Machines | 9 |
+| 🏢 Active Directory | 7 |
+| 📝 Writeups Published | 10 |
 | 🎓 Academy Modules Completed | 12 |
 
 > Updated after every machine
@@ -60,6 +60,7 @@ I'm currently training for the OSCP certification through daily hands-on practic
 | 7 | [Timelapse](htb-writeups/Timelapse/README.md) | 🪟 Windows | Easy | SMB Enumeration, PFX Certificate Auth, PowerShell History, LAPS | [View](htb-writeups/Timelapse/README.md) |
 | 8 | [Return](htb-writeups/Return/README.md) | 🪟 Windows | Easy | Printer Credential Capture, Server Operators, Service Binary Hijack | [View](htb-writeups/Return/README.md) |
 | 9 | [Heist](htb-writeups/Heist/README.md) | 🪟 Windows | Easy | Cisco Password Cracking, RID Brute Force, Firefox Memory Dump | [View](htb-writeups/Heist/README.md) |
+| 10 | [Cicada](htb-writeups/Cicada/README.md) | 🪟 Windows | Easy | SMB Enumeration, RID Cycling, Credential Reuse, SeBackupPrivilege | [View](htb-writeups/Cicada/README.md) |
 
 ---
 
@@ -70,7 +71,7 @@ I'm currently training for the OSCP certification through daily hands-on practic
 - Gobuster / ffuf (web directory and parameter fuzzing)
 - Manual web enumeration (IDOR, parameter tampering)
 - Burp Suite (traffic interception, request manipulation)
-- AD enumeration (BloodHound, ldapsearch, rpcclient, crackmapexec, netexec)
+- AD enumeration (BloodHound, ldapsearch, rpcclient, crackmapexec, netexec, impacket-lookupsid)
 
 **Exploitation**
 - Web vulnerabilities (IDOR, LFI, SQLi, SSTI, file upload)
@@ -87,7 +88,7 @@ I'm currently training for the OSCP certification through daily hands-on practic
 
 **Privilege Escalation**
 - Linux: SUID, capabilities, cron jobs, sudo misconfigurations, linPEAS
-- Windows: SeImpersonatePrivilege, service misconfigs, AlwaysInstallElevated, winPEAS
+- Windows: SeImpersonatePrivilege, SeBackupPrivilege, service misconfigs, winPEAS
 - Active Directory: Pass-the-Hash, DCSync, BloodHound attack paths, RBCD, LAPS, WriteDACL, GenericAll, Server Operators
 
 **Tools**
@@ -106,10 +107,10 @@ I'm currently training for the OSCP certification through daily hands-on practic
 ```
 March 9-25 2026  → HTB Academy (12 modules completed ✅)
 April 1 2026     → HTB VIP — Machine grind begins
-April 2026       → 15+ machines (Windows, Linux, AD)
-Early May 2026   → Pre-Lab Mastery + Mock Exam #1
-Mid May 2026     → PEN-200 Course + Lab Access
-June 2026        → Lab Grind + Mock Exam #2
+April 2026       → Phase 1 complete ✅ (Forest, Sauna, Active, Support, Timelapse, Return, Heist, Cicada)
+Early May 2026   → Phase 2 — Intermediate AD Attacks
+Mid May 2026     → Phase 3 — Advanced Chains + ADCS
+June 2026        → Phase 4 + Mock Exam
 July 2026        → OSCP Exam 🎯
 ```
 
