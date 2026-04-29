@@ -1,15 +1,15 @@
 # oscp-journey
 
 **Student:** Arnold Mavhezha (mavhezha)
-**Program:** Yeshiva University — MS Cybersecurity
-**Certification Target:** OSCP — July 2026
+**Program:** Yeshiva University: MS Cybersecurity
+**Certification Target:** OSCP: July 2026
 **Methodology:** TJ Null HTB list
 
 ---
 
 ## Progress
 
-### Windows Phase 1 — COMPLETE
+### Windows Phase 1: COMPLETE
 
 | Machine | Techniques |
 |---------|------------|
@@ -22,7 +22,7 @@
 | Heist | Cisco password cracking, RID brute force, Firefox memory dump |
 | Cicada | SMB enum, RID cycling, credential reuse, SeBackupPrivilege |
 
-### Linux Phase 1 — IN PROGRESS
+### Linux Phase 1: IN PROGRESS
 
 | # | Machine | Techniques | Status |
 |---|---------|------------|--------|
@@ -57,15 +57,15 @@
 | 29 | October | CMS RCE, buffer overflow privesc | Pending |
 | 30 | Haircut | Command injection, SUID privesc | Pending |
 
-### Windows Phase 2 — Pending (after Linux Phase 1)
+### Windows Phase 2: Pending (after Linux Phase 1)
 
 Access, ServMon, Cascade, Monteverde, Intelligence, Escape, Manager, StreamIO
 
-### Windows Phase 3 — Pending
+### Windows Phase 3: Pending
 
 Certified, Administrator, Mailing, Aero, Blackfield, Flight, Jeeves, TombWatcher
 
-### Windows Phase 4 — Pending
+### Windows Phase 4: Pending
 
 EscapeTwo, Fluffy, TheFrizz, Authority, Rebound
 
@@ -91,10 +91,10 @@ EscapeTwo, Fluffy, TheFrizz, Authority, Rebound
 
 ## Repositories
 
-- [oscp-journey](https://github.com/mavhezha/oscp-journey) — this repo
-- [linux-breach-investigation](https://github.com/mavhezha/linux-breach-investigation) — DFIR lab writeup
-- [dfir-triage-tool](https://github.com/mavhezha/dfir-triage-tool) — automated DFIR bash + Python tool
-- [juice-shop-pentest](https://github.com/mavhezha/juice-shop-pentest) — OWASP Juice Shop pentest
+- [oscp-journey](https://github.com/mavhezha/oscp-journey) | this repo
+- [linux-breach-investigation](https://github.com/mavhezha/linux-breach-investigation) | DFIR lab writeup
+- [dfir-triage-tool](https://github.com/mavhezha/dfir-triage-tool) | automated DFIR bash + Python tool
+- [juice-shop-pentest](https://github.com/mavhezha/juice-shop-pentest) | OWASP Juice Shop pentest
 
 ---
 
