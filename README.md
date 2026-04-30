@@ -27,7 +27,7 @@
 | # | Machine | Techniques | Status |
 |---|---------|------------|--------|
 | 1 | Cap | IDOR, FTP credential extraction from PCAP, cap_setuid | Rooted |
-| 2 | Lame | SMB exploitation, Samba CVE | Pending |
+| 2 | Lame | SMB enumeration, CVE-2007-2447 Samba RCE | Rooted |
 | 3 | Shocker | Shellshock, cron privesc | Pending |
 | 4 | Bashed | Web shell, sudo privesc | Pending |
 | 5 | Nibbles | Web enumeration, sudo privesc | Pending |
@@ -86,6 +86,7 @@ EscapeTwo, Fluffy, TheFrizz, Authority, Rebound
 | cap_setuid | python3 -c os.setuid(0) | N/A | One-liner to root |
 | IDOR | Browser / curl | N/A | Decrement numeric ID in URL |
 | FTP cred extraction | Wireshark ftp filter | N/A | Plaintext in control channel |
+| Samba usermap script | msf usermap_script | N/A | CVE-2007-2447, root via username field |
 
 ---
 
