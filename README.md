@@ -29,7 +29,7 @@
 | 1 | Cap | IDOR, FTP credential extraction from PCAP, cap_setuid | Rooted |
 | 2 | Lame | SMB enumeration, CVE-2007-2447 Samba RCE | Rooted |
 | 3 | Shocker | Shellshock CVE-2014-6271, CGI enumeration, Perl sudo privesc | Rooted |
-| 4 | Bashed | Web shell, sudo privesc | Pending |
+| 4 | Bashed | phpbash web shell, sudo lateral move, cron script overwrite | Rooted |
 | 5 | Nibbles | Web enumeration, sudo privesc | Pending |
 | 6 | Beep | LFI, multiple entry points | Pending |
 | 7 | Networked | File upload bypass, cron privesc | Pending |
@@ -89,6 +89,9 @@ EscapeTwo, Fluffy, TheFrizz, Authority, Rebound
 | Samba usermap script | msf usermap_script | N/A | CVE-2007-2447, root via username field |
 | Shellshock | curl -H User-Agent | N/A | CVE-2014-6271, bash env var injection via CGI |
 | Perl sudo privesc | sudo perl -e exec | N/A | GTFOBins, NOPASSWD instant root |
+| phpbash web shell | Browser | N/A | Dev tool left on server, direct www-data access |
+| sudo lateral move | sudo -u scriptmanager | N/A | NOPASSWD ALL, switch user context |
+| Cron script overwrite | echo payload > script.py | N/A | Writable script executed by root on schedule |
 
 ---
 
