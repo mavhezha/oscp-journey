@@ -30,7 +30,7 @@
 | 2 | Lame | SMB enumeration, CVE-2007-2447 Samba RCE | Rooted |
 | 3 | Shocker | Shellshock CVE-2014-6271, CGI enumeration, Perl sudo privesc | Rooted |
 | 4 | Bashed | phpbash web shell, sudo lateral move, cron script overwrite | Rooted |
-| 5 | Nibbles | Web enumeration, sudo privesc | Pending |
+| 5 | Nibbles | HTML comment recon, default creds, file upload RCE, sudo writable script | Rooted |
 | 6 | Beep | LFI, multiple entry points | Pending |
 | 7 | Networked | File upload bypass, cron privesc | Pending |
 | 8 | Irked | IRC enumeration, steganography, SUID | Pending |
@@ -91,7 +91,9 @@ EscapeTwo, Fluffy, TheFrizz, Authority, Rebound
 | Perl sudo privesc | sudo perl -e exec | N/A | GTFOBins, NOPASSWD instant root |
 | phpbash web shell | Browser | N/A | Dev tool left on server, direct www-data access |
 | sudo lateral move | sudo -u scriptmanager | N/A | NOPASSWD ALL, switch user context |
-| Cron script overwrite | echo payload > script.py | N/A | Writable script executed by root on schedule |
+| Cron script overwrite | printf payload > script | N/A | Writable script executed by root on schedule |
+| File upload bypass | PHP in image field | N/A | Extension filter bypass, verify by accessing path |
+| sudo writable script | printf payload > script | N/A | world-writable sudo script, NOPASSWD instant root |
 
 ---
 
