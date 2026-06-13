@@ -22,7 +22,7 @@
 | Heist | Cisco password cracking, RID brute force, Firefox memory dump |
 | Cicada | SMB enum, RID cycling, credential reuse, SeBackupPrivilege |
 
-### Linux Phase 1: IN PROGRESS
+### Linux Phase 1: IN PROGRESS (5 of 30)
 
 | # | Machine | Techniques | Status |
 |---|---------|------------|--------|
@@ -31,35 +31,19 @@
 | 3 | Shocker | Shellshock CVE-2014-6271, CGI enumeration, Perl sudo privesc | Rooted |
 | 4 | Bashed | phpbash web shell, sudo lateral move, cron script overwrite | Rooted |
 | 5 | Nibbles | HTML comment recon, default creds, file upload RCE, sudo writable script | Rooted |
-| 6 | Beep | LFI, multiple entry points | Pending |
-| 7 | Networked | File upload bypass, cron privesc | Pending |
-| 8 | Irked | IRC enumeration, steganography, SUID | Pending |
-| 9 | Friendzone | DNS enumeration, LFI, cron hijack | Pending |
-| 10 | Postman | Redis RCE, SSH key, Webmin CVE | Pending |
-| 11 | OpenAdmin | OpenNetAdmin RCE, SSH key cracking, sudo | Pending |
-| 12 | Traverxec | Nostromo RCE, restricted shell, sudo | Pending |
-| 13 | Admirer | Web enumeration, Python path hijack | Pending |
-| 14 | Blunder | Bludit CMS brute force, sudo privesc | Pending |
-| 15 | ScriptKiddie | OS command injection, sudo Metasploit | Pending |
-| 16 | Knife | PHP 8 backdoor, sudo knife | Pending |
-| 17 | Cronos | DNS zone transfer, SQLi, cron privesc | Pending |
-| 18 | Sense | OpenBSD, pfsense RCE | Pending |
-| 19 | Paper | WordPress CVE, Rocket.Chat RCE | Pending |
-| 20 | Horizontall | Laravel RCE, SSH tunneling | Pending |
-| 21 | Soccer | vHost enumeration, SQLi WebSocket, SUID | Pending |
-| 22 | Nineveh | PHPLiteAdmin, LFI chaining | Pending |
-| 23 | Tartarsauce | Wordpress, LFI, restricted shell, sudo | Pending |
-| 24 | Valentine | Heartbleed, SSH key decryption, tmux | Pending |
-| 25 | Solidstate | Restricted shell escape, cron privesc | Pending |
-| 26 | Poison | Log poisoning, LFI, VNC tunneling | Pending |
-| 27 | Magic | SQLi auth bypass, image upload, SUID | Pending |
-| 28 | Node | API enumeration, MongoDB, gtfobins | Pending |
-| 29 | October | CMS RCE, buffer overflow privesc | Pending |
-| 30 | Haircut | Command injection, SUID privesc | Pending |
 
-### Windows Phase 2: Pending (after Linux Phase 1)
+### Windows Phase 2: IN PROGRESS
 
-Access, ServMon, Cascade, Monteverde, Intelligence, Escape, Manager, StreamIO
+| # | Machine | Techniques | Status |
+|---|---------|------------|--------|
+| 1 | Access | FTP anonymous, MDB cred extraction, PST analysis, Telnet, runas stored creds | Rooted |
+| 2 | ServMon | FTP, NVMS path traversal, SSH tunneling, NSClient++ privesc | Pending |
+| 3 | Cascade | LDAP enum, VNC password decrypt, AD Recycle Bin, .NET RE | Pending |
+| 4 | Monteverde | Azure AD Connect, password spray, service account abuse | Pending |
+| 5 | Intelligence | PDF metadata, DNS abuse, GMSA password read, Kerberos delegation | Pending |
+| 6 | Escape | MSSQL, NTLMv2 capture, certificate abuse ESC1 | Pending |
+| 7 | Manager | MSSQL xp_dirtree, certificate abuse ESC7 | Pending |
+| 8 | StreamIO | SQLi, LFI, Firefox credential dump, AppLocker bypass | Pending |
 
 ### Windows Phase 3: Pending
 
@@ -93,7 +77,10 @@ EscapeTwo, Fluffy, TheFrizz, Authority, Rebound
 | sudo lateral move | sudo -u scriptmanager | N/A | NOPASSWD ALL, switch user context |
 | Cron script overwrite | printf payload > script | N/A | Writable script executed by root on schedule |
 | File upload bypass | PHP in image field | N/A | Extension filter bypass, verify by accessing path |
-| sudo writable script | printf payload > script | N/A | world-writable sudo script, NOPASSWD instant root |
+| sudo writable script | printf payload > script | N/A | World-writable sudo script, NOPASSWD instant root |
+| MDB extraction | mdb-export | N/A | mdbtools, dump auth_user table |
+| PST analysis | readpst | N/A | Convert to mbox, grep for credentials |
+| runas stored creds | runas /savecred | N/A | cmdkey /list first, execute as stored user |
 
 ---
 
